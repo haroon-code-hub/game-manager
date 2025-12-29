@@ -38,6 +38,16 @@ app.put("/api/games/:id", (req, res) => {
   res.json(games[idx]);
 });
 
+app.delete("/api/games/:id", (req, res) => {
+  const { id } = req.params;
+  const idx = games.findIndex((g) => g.id === Number(id));
+  if (idx === -1) return res.status(404).json({ error: "Game not found." });
+
+  const deletedGame = games.splice(idx, 1)[0];
+
+  res.json(deletedGame);
+});
+
 app.listen(3000, () => {
   console.log("Server running on port 3000");
 });
