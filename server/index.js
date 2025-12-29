@@ -8,7 +8,13 @@ app.use(cors());
 
 app.get("/api/games", (req, res) => {
   res.json(games);
-}),
-  app.listen(3000, () => {
-    console.log("Server running on port 3000");
-  });
+});
+
+app.post("/api/games", (req, res) => {
+  const newGame = req.body;
+  games.push({ ...newGame, id: games.length + 1 });
+  res.status(201).json(newGame);
+});
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
